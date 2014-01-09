@@ -45,7 +45,10 @@ function init(grunt) {
         fileObj.src.forEach(function(src) {
           var srcText = grunt.file.read(src);
           context.src = src;
-          context.srcDir = path.dirname(src);
+          if (!context.relative)
+            context.srcDir = context.srcDir || process.cwd();
+          else
+            context.srcDir = path.dirname(src);
           var processed = preprocess.preprocess(srcText, context, getExtension(src));
           grunt.file.write(src, processed);
         });
@@ -54,7 +57,10 @@ function init(grunt) {
         var dest = grunt.template.process(fileObj.dest);
         var srcText = grunt.file.read(src);
         context.src = src;
-        context.srcDir = path.dirname(src);
+        if (!context.relative)
+          context.srcDir = context.srcDir || process.cwd();
+        else
+          context.srcDir = path.dirname(src);
         var processed = preprocess.preprocess(srcText, context, getExtension(src));
         grunt.file.write(dest, processed);
       }

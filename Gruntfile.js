@@ -7,7 +7,9 @@ module.exports = function(grunt) {
     preprocess : {
       options : {
         context : {
-          globalOption : "bar"
+          globalOption : "bar",
+          relative: false,
+          srcDir: 'test/fixtures'
         }
       },
       html : {
@@ -18,6 +20,10 @@ module.exports = function(grunt) {
             customOption : 'foo'
           }
         }
+      },
+      nested_include : {
+        src : 'test/fixtures/subfolder/test.nested.include.html',
+        dest : 'tmp/fixtures/test.nested.include.processed.html'
       },
       js : {
         src : 'test/fixtures/test.js',

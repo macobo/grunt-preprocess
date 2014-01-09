@@ -42,6 +42,16 @@ exports['preprocess'] = {
     test.done();
 
   },
+  'preprocess html nested include': function(test) {
+    test.expect(1);
+    var expected, actual;
+
+    expected = 'test/expected/test.nested.include.expected.html';
+    actual = 'tmp/fixtures/test.nested.include.processed.html';
+    test.equal(read(expected), read(actual), actual + ' differs');
+
+    test.done();
+  },
   'preprocess js': function(test) {
     test.expect(1);
     var expected, actual;
